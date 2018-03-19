@@ -10,6 +10,7 @@ export interface ReportProps {
     // power bi report configuration
     config: pbi.IEmbedConfiguration;
     newSettings?: any;
+    layoutSettings?: any;
 }
 
 interface State {
@@ -116,6 +117,13 @@ export class Report extends React.Component<ReportProps, State> {
                 component.on("commandTriggered", function(event) {
                     let commandDetails = event.detail;
                     console.log("Click on:" + JSON.stringify(commandDetails));
+                });
+            }
+
+            if (this.props.layoutSettings) {
+                // Update the settings by passing in the new settings you have configured.
+                component.updateSettings(this.props.layoutSettings).catch((error) => {
+                    console.log("updatesetting error" + JSON.stringify(error));
                 });
             }
         });

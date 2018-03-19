@@ -7,8 +7,10 @@ import { Resizable, ResizableBox } from 'react-resizable';
 
 import Draggable from 'react-draggable';
 
+import { IError, validateReportLoad, VisualContainerDisplayMode, LayoutType, DisplayOption, PageSizeType } from "powerbi-models";
+
 const reactLogo = require("./../assets/img/react_logo.svg");
-const token = "H4sIAAAAAAAEACWWx86EbI5G7-XfMhJFhpF6QZEzvGR2ZChyDqO59_mme2sdb85j2f6ff-z06ae0-Oe__6GF06IEnXIfgNqofgBeYwXTd6vTJZDFiSGyPL5hRzuVdsgsAOjgcPFyaPRdjdzOlzbiZDSBiRcnHV3va3Cxsjb5-F0vQViffmBYkpzRGwpJGQlXtAAIowdKtFTW4-CEi45Mo1fmewXKWO2tI4oNHWWECyoAJOHmaeFdwVTOntPEkBX0rmtpXM2rkEtRMxW6Nh6e4jH-BrwuGw00S4aSfqr5elC0uW3IbRIInBU-R8CMosAZ0dm4dsIqahVybPop8GFRV8WU542DIVxr0826Ap7M8mKYFF_3BHRNE1ptZtNyPB8ls-txKZ8azkNKGrSviehXkUIeClgyUDV1Y1ZnFZcOKiXEZWgBl9y2fVusAtVnSU1pH8r5iR6x-PziCyNi6pcDYZkzyT5gS_8FjBU7cqSYWT_v7JGOXWLxPfLX5GX7jwHpxjXPcOH8xfUsWzQu3QiVN8rgZJKPR6ubWGAPHznBX1lTFATEXZq8Z9zCG2g3idQavdY3-DQ1I5QhS20eitU9tytOfIQVjWXK9F2PXJ7LDMblliA3-ncK1JgRg7UXW0ViTjYl8UyhtV_Bx5LiuiE2Mjt-k20P-N2X3emdVC-7BMr4mh4zN1QsIh10rbWkz8TzmXBC28PDQ3XdWJ8G02MOgLH0HOrTvuVgQFgr3q2ysj_11EX-mQIWjAjMXPNXnQtsvKrfsxEZI5Zs_E0pEkGNBMlSpaBOU9CYrLiwyWcPJL3hDQ0L43nebom4Zh4yUgguxQVzUNztTvxgC2J6NLbkOnSCL1lx3aFrkU-GWKmnXfQiyIgfmUVJeji7BGiIdPolqSBHeek3ckl7jr0Yggbcn_T8KsTew2Ss15jaOBYO0gpyhYUmTT4hDVrmydC93ss0uG-RlcWzojzmGlG5H4o36OMS4lvwDOEA3c_eTuT86kDQX1OVUr88Wjs8p6oidFGx3EHtwsscauMOc6dzYfDVFrb8eSjCeS_AnC-QfUNy1o8rCasXkzhMO3SkDsNL87IhtNpTsdNX6ahfWGqPKWyMvf9hm9pXp3IllkeJe_G8qyOt81ulqOZ1pDHnXI7rgPSbuRXLfVPFobJwiHq-I8Xa3fpwuMdFTAvuG39DIXJYL9w6-DEPTdMNdmnW9zAfWuxmlypzy2rXtZhs6lhKFBE4MvBfwmTQZu7rRtwZdjmZl7g-U5lEO-fRXM63ZH5Fl867HujFcG-uu_SoZXuXCT7A3rOh1_CDJqEcEQtIErjmBaHSLkhqHXtMge0Sa0Xd4scsbKp6hjfelwcHMZTYPpMWPtmbSn4p58qiarU5gWRlGhFm2qfRMdyx8MWRdUaOc-ReEpqdze1fPxYG14q2uNIQzvgbzxdhGa7cJ6_8jffxYrVoTx2dGVk0-FJQCwUmYQtw8vVGgmaJnKH2WCBO47GTk-lVdnlk9ZGHQLObXzM4aTwhgRX_4MC9yMiiOET28EeNMzZZEKJOC-hbN3P8xmn8hqyCS6A-rV--ZiY66vggkr_Z6BteEOvD5FQO37knrs-G0bO2yCdOdGtBOhaxNfhVfsyZuTk7iaa5E_b9Kb49M73FPUGslnSXZC-I5UP7g9UBTHyVAoM6dBlaz6i6RP8I-yveMvkO6nl_siX7wslkEnDvrFU5uq8_T1GAcdB71j1bEVInO6B1qA1YFfJNuLjAOqRiGWxO7C9t8ANTz7VxJCAbbgZyfcAVECDwkiC_dP7wlGRwaSEkn14bYVxadzDaFH93vw9leoWbLAYzsneAgaJ8xiC5A39bRXt5i02KSOIZihNCFZtLym9LwLP9SB6sn1xVdbJZVFmgd80HAS6C0DMCqzdVOHMvQANhnKQP4vRW2ztgYsx7utGu1E_dYvAbUwhLeFKiionzLYk-1XAVnbiXf0lQUYoJ-47T6tsBwUtp_M75OsUEKxNJcUd0Dom-75pYj3TfgeArR1-0lTSCQJkGvHUVzj-82QVU7S7-JuyaP_OOFdrf7-_SQu-EFFb2cRUSLZh0L4k80CmdrBI_K4ivkwWSZBdDSA2Uzpz0hwVPWC0Q9yMExfyqNwFhbh8AE1S5n6IOsmhIbqbRM9wEm20c7-vU1F3Hpz39NWk6MHLRrgomWXcBvWig2_Id6xKTOMwFQH9h9rTNdGIIDM4Y63_965__-odbn3mftPL5ezOslT_dDhgnemAayH8Fs_6t7iuz1tqVir1hKbw5WFVZqA-kZ-9L5WwpT_SxCtmAuEQwQqrx1E9EN-488JiAOoyaoHI4LGjJGW8Jrq6qMCkf73G3aEYt5YclgjlS5SIncJjXYE5rKHpqhEFACZ7jm0BG9jZusXJvFZ6V2V3rlCrLh_eJ8wPJ0E_82X_UzAH9Dqih1535l7SyvlthVtQbH0WjLnHo437eleDbNwepl6dkLKLJJlQrPj0buT4JV6NCUWIcnGhXqjjz0bFUf98VZnDOSYhWyoXciMIXbzHkW_vUzgzMIiNu-QwoeYfAv8jUeTr1SNJ5UR5hyYXriG3jrgLqZf-j-ZmbclWCP8vdEHpWl0pSCPUJADPP9arg_Jty23pM92Mt_zDlXC4c-qENYh8_jo8p_C_B4XxZkpaVP6O7u5YBwbWcu_Fu3cvzOwsBuyZ5HlqZYjowz9uf7bZCijzEH6Ory-bAxuqwy0ROzcF8ykq3tiuZWDZ3BXOPrsJEpzdptM922nFgx4IciN46825mMgvCQT5nspw6Kh-utGr6e94NatSkjiRGqPWUstYyK1cH8XXX-Od-DlnDTm2Yh1stNYYPCca479i4SeBvVrle2gkw9aNcqzW26RLkZ7adB8geQ3CswG-IU78YGm4aX1J9zFZp9yPKEW67g4N-CLBrqO7B41bR5iDeVZpMmC4LzdQ0eBRQCLpeTmRJ5AzuuIGOw37TUEFQ8_81_-__AS9c0vhaCwAA";
+const token = "H4sIAAAAAAAEACWWt67FDG6E3-VvZUA5HANbKOec1SnnnGX43X2925MFh8Ph9z__WOk7zGnxz3__o8jwER2GZSb9gYBhsKOIJThpI9n4ttV0BBqW7ewW1l_uiXmgammE2KbXyTWlLuNMb375Nqrh80JOdj1bEGFciYz4JV7DkFUvz-dWYcmLGACFy5LJCDb4GUb1LXrvnZ9tAhutfWTq9zzDcLw7PcInI0nDZm5nJyKBII6UM-RvLOpCufFSzxzcSpn6xFWa9JFXnvft7BimQeXf49tmZVmZyXkHRQvzGt5G4_PriBI-VXRr_pG_TXqlXA7qXbWAS7bTcPbjyl6M5Sfdr0HyNTmEI6Y5UalpgaizDDMBtnloi9adQWPexGzrJy0_TQfZOKPf03KJe1LhPjo4Iu8kgP1DVI-_BG2SMO_ctba6fKXHQN3jf_bVkZbRgjTBptvt1w04sy_EqAkjuOjefgZo_xzBPtzbWfVQMBf0NB27IN5SUUB99CUpyQkr1fT18oTUCCnJ9mfZoPGl_0RAy9NbNKIhfZ7umtAOzNssHyBtJww9sCbxAfPBivcTws8g3Def7PB-mULmGTcpHNDMQYr-lJF1NFBktsegHZNZHSMiDGtXoD2l0aYgYzQx0UiyDfGpR_TSEKSrhgHQ5KPY2jel2lO80YpWSSCaiME36PAaFbTthNzdF-8jDowAvQutwYxPmI9p5Ud3a7ejtyxx2_lMCx-vxi6WbscKIt_v3viA9GFvoOrntg3k0TewWxmmpTuRtMfNWeWiTOBLHFsZw8e5eAakcLgA2lU7oSatQCz55Lar9-8lkpwaMa3TUyXeWb3OiCyrfBS1xOUCKyZdj0C4VqpoRlTVAcCeg4VV5_ubRdmUYOo2bDc9VTldYxIFL63Zz7DK7aHHd5p94e8kvYhooPlTt8WOYYEu7if_hRR0jUl8cS45Zd_l86EslwYaiMXT2J1SHSEwpa4kLiPf18Z60QjZ6X6rL0gK6LFiN9OGd4B5wak3HZUNzSNghuWJFCy_OG_e2ozB5Uy2ubuQWkPB-stnqATsD2zrwfv4zj0hoKglfa-yG53HrlzoYDofnR3o9QuXy90FI8n8DYFqcxJXD-4O_xevPcOsbAsTqYBOmFFjmi10_szabhLZ-7TZL94Dth8_3t8F1X3W2v6E0kQhCpK49M604d9NNZskZZSmn_PMTiY7zflNsLe0MKZ5zA_KpY54iIGdbQaBJJ8TeKbN4o6AqR1YACfqDdKRjNK3FZJE4ej2WOm3cBQ_zhNtF-CKBCDXdSu9AtoIm4X6wynd0TD8J9w7QXePZLJYg3yiAX2dmHGpPhYmuspcMq-gT4snjMFZEA-DZ2Q_jQoLBGbS-i63j6s-0HJQRPfyRShbz1LMOkH8cygtuStXLgZ2ociZjuWcOeOPJTN_A5HRoUiNoesowMzdOpel0xmQpWHwzXYKN8BfPrXS8B1KyVeva1OhN8bD1F0Dgse9oxPRDyem1hXi5mvV6v4Oava-tTJKHMe8r9mnCjBtvp6QF-3Dzjm7gtcMuEE8mNlKE10zXvhB-PGD0DoRBZhfdFS79dXBqTX4odsrwoKqIdui3bRhb-R5jzu0uPlG26uBLIEI4sx9O3l2h2WQ90kmz_1mGo5ua_C8hCDRo0YbrZCwWKXsCdUXZ6beGZ_zF8hX0tF1fCpo8434ENB8HPIBrIk1Htw2yyv9FcGaZxkHyz0e4z3C0O0LDOKEDEkNwNhxbj_PyzMmcjiJhWwlqRuF5zRjvog6P8wYLp_VWvo-AtzgX9pM-FEff4MrAI-KZDCsIODRcg0ffZo4GM7dSx8DWUn2TVKRp_OATsaqmayVyvQIiKddl9wFbAJO1-jcvRgNYWKfzUQymlPh0AoSw_XxIvB6WWfEyOrdmoyt0H7mr5HelerePvZ7EdjvCsIuHL0ITDw85J_nZumli1ZBDRdoVRfb87Jy_jKlZsTfuKqj7vdEZjP70KXYkykF7dMfNHaxrA6ORHiSOt5cA5ULjOYxzPctVl_f6wps0HKNVduF7wpXYWS6UC82oW6iw7q5dMj-eI0XK73wApUIoQqjqCxRRjqPpZxgP67FGI3eWFSdcXbphs0v2c_yywJNbOrRGSrGtD5g72Z6J4-tw-BM0M1FNrnK1vE6VZ0aMKkcAMo-XGBYiYUjr6PZVMTQFjdpMKOuCX3EFF17fhz9Ga7HWd7_-tc___UPu73LMavl-4cZOd_hLrlBF7a51JUnG-Zs5SddNtgG9Jht-CVriQPnQ4JTZg9VdFdLquvYDDAihkBLYFMALjO6YhyUW5LbQSz1Y4no3LWKGV5LLxs4p0bCUsWFk0z1aght94WLziFZU06P-eEAGqI4LP-442Gn-0ibEh58gFFh5Z9vPgqMfiw7Cj442eAFBeUYvIaEv1NzmanyuUk2B1H6cwXRXTQ7FyhInDG-V_Z25O4gUxo3joZaJOo_e2PsghJj6ez0T3gyViDjUwB4ifGUX7ho0ecz8iYBI1xxmxP1kgsx1z1ZvjBtFlhByg0pCB24-rTrYBgyeuQga0Z7kd4VjNyA9434g8GwHE3_R-Z3acpNDv5UZnboNPrYkX584b5MVV1Jo9v_rnLbekqPcyv_ysYK1Ppku59LfqmBcowSX5RnqTf706QI7hbQtcxNwKZO5nuGSzjyPEBRtNmE9vkEOP-oiOh8zzVHoM1DnCnHj__oGCjzfCJbU9Z90h3nuFJYO9I4WKYIWbQPX3IM4_Mlqkev36PXUUFrdMooj4S2NcStrXQUk6Lxv2POxCOabJHFD-uMQcf7g5qF6BLs8BvVes7bWW5fTcBwO7K2ezt-AVKkwkURIGQbMb1nNb3isWzKVCmARuaMfQPY_EO1r-sHWDDYLL4bPa6YYjc7jLzm7OJzGd14LHQJiUB_d-Z3VfFWruMJ-ofKl7eTnFQlmPjX9vcqvMS283Y6VF0r2duj8pis_38Z__t_D2xybloLAAA=";
 const embedUrl = "https://app.powerbi.com/reportEmbed?reportId=bac25fa7-d58d-40b6-8b01-606d165c3b43&groupId=be8908da-da25-452e-b220-163f52476cdd";
 
 const reportId = "bac25fa7-d58d-40b6-8b01-606d165c3b43";
@@ -152,12 +154,63 @@ export default class App extends React.Component<AppProps, any> {
               }
             ]
           };
+
+           // Define default visual layout: visible in 400x300.
+        let defaultLayout = {
+            width: 400,
+            height: 300,
+            displayState: {
+            mode: VisualContainerDisplayMode.Hidden
+            }
+        };
+   
+    // Define page size as custom size: 1000x580.
+    let pageSize = {
+        type: PageSizeType.Custom,
+        width: 500,
+        height: 580
+    };
+    
+    // Page layout: two visible visuals in fixed position.
+    let pageLayout = {
+        defaultLayout: defaultLayout,
+        visualsLayout: {
+        "VisualContainer7": {
+            x: 0,
+            y: 0,
+            displayState: {
+            mode: VisualContainerDisplayMode.Visible
+            }
+        },
+        "VisualContainer4": {
+            x: 0,
+            y: 300,
+            displayState: {
+            mode: VisualContainerDisplayMode.Visible
+            }
+        }
+        }
+    };
+    
+    let layoutSetting = {
+        filterPaneEnabled: false,
+        navContentPaneEnabled: false,
+        layoutType: LayoutType.Custom,
+        customLayout: {
+            pageSize: pageSize,
+            displayOption: DisplayOption.FitToPage,
+            pagesLayout: {
+                "ReportSection3": pageLayout
+            }
+        }
+    };
         return (
             <div className="app">
                 <div className="row">
                     <div className="graph resizable" draggable={true}>
                         <Report
                             config={embed}
+                            layoutSettings={layoutSetting}
                         />
                     </div>
                     <div className="graph resizable" draggable={true}>
