@@ -70,7 +70,17 @@
     "webpack-merge": "^4.1.1"
   },
   "dependencies": {
+    "c3": "^0.4.22",
+    "chart.js": "^2.7.2",
+    "chartjs": "^0.3.24",
+    "chartjs-plugin-annotation": "^0.5.7",
+    "chartjs-plugin-datalabels": "^0.2.0",
+    "chartjs-plugin-draggable": "^0.1.6",
+    "chartjs-plugin-zoom": "^0.6.3",
+    "d3": "^4.13.0",
     "powerbi-client": "^2.4.7",
+    "react-chartjs-2": "^2.7.0",
+    "react-d3-basic": "^1.6.11",
     "react-draggable": "^3.0.5",
     "react-resizable": "^1.7.5"
   },

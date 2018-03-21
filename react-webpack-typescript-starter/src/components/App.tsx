@@ -9,8 +9,12 @@ import Draggable from 'react-draggable';
 
 import { IError, validateReportLoad, VisualContainerDisplayMode, LayoutType, DisplayOption, PageSizeType } from "powerbi-models";
 
+import { LineGraph1 } from "./LineGraph1";
+import { LineGraph2 } from "./LineGraph2";
+import { Chart } from "./Chart";
+
 const reactLogo = require("./../assets/img/react_logo.svg");
-const token = "H4sIAAAAAAAEACWWt67FDG6E3-VvZUA5HANbKOec1SnnnGX43X2925MFh8Ph9z__WOk7zGnxz3__o8jwER2GZSb9gYBhsKOIJThpI9n4ttV0BBqW7ewW1l_uiXmgammE2KbXyTWlLuNMb375Nqrh80JOdj1bEGFciYz4JV7DkFUvz-dWYcmLGACFy5LJCDb4GUb1LXrvnZ9tAhutfWTq9zzDcLw7PcInI0nDZm5nJyKBII6UM-RvLOpCufFSzxzcSpn6xFWa9JFXnvft7BimQeXf49tmZVmZyXkHRQvzGt5G4_PriBI-VXRr_pG_TXqlXA7qXbWAS7bTcPbjyl6M5Sfdr0HyNTmEI6Y5UalpgaizDDMBtnloi9adQWPexGzrJy0_TQfZOKPf03KJe1LhPjo4Iu8kgP1DVI-_BG2SMO_ctba6fKXHQN3jf_bVkZbRgjTBptvt1w04sy_EqAkjuOjefgZo_xzBPtzbWfVQMBf0NB27IN5SUUB99CUpyQkr1fT18oTUCCnJ9mfZoPGl_0RAy9NbNKIhfZ7umtAOzNssHyBtJww9sCbxAfPBivcTws8g3Def7PB-mULmGTcpHNDMQYr-lJF1NFBktsegHZNZHSMiDGtXoD2l0aYgYzQx0UiyDfGpR_TSEKSrhgHQ5KPY2jel2lO80YpWSSCaiME36PAaFbTthNzdF-8jDowAvQutwYxPmI9p5Ud3a7ejtyxx2_lMCx-vxi6WbscKIt_v3viA9GFvoOrntg3k0TewWxmmpTuRtMfNWeWiTOBLHFsZw8e5eAakcLgA2lU7oSatQCz55Lar9-8lkpwaMa3TUyXeWb3OiCyrfBS1xOUCKyZdj0C4VqpoRlTVAcCeg4VV5_ubRdmUYOo2bDc9VTldYxIFL63Zz7DK7aHHd5p94e8kvYhooPlTt8WOYYEu7if_hRR0jUl8cS45Zd_l86EslwYaiMXT2J1SHSEwpa4kLiPf18Z60QjZ6X6rL0gK6LFiN9OGd4B5wak3HZUNzSNghuWJFCy_OG_e2ozB5Uy2ubuQWkPB-stnqATsD2zrwfv4zj0hoKglfa-yG53HrlzoYDofnR3o9QuXy90FI8n8DYFqcxJXD-4O_xevPcOsbAsTqYBOmFFjmi10_szabhLZ-7TZL94Dth8_3t8F1X3W2v6E0kQhCpK49M604d9NNZskZZSmn_PMTiY7zflNsLe0MKZ5zA_KpY54iIGdbQaBJJ8TeKbN4o6AqR1YACfqDdKRjNK3FZJE4ej2WOm3cBQ_zhNtF-CKBCDXdSu9AtoIm4X6wynd0TD8J9w7QXePZLJYg3yiAX2dmHGpPhYmuspcMq-gT4snjMFZEA-DZ2Q_jQoLBGbS-i63j6s-0HJQRPfyRShbz1LMOkH8cygtuStXLgZ2ociZjuWcOeOPJTN_A5HRoUiNoesowMzdOpel0xmQpWHwzXYKN8BfPrXS8B1KyVeva1OhN8bD1F0Dgse9oxPRDyem1hXi5mvV6v4Oava-tTJKHMe8r9mnCjBtvp6QF-3Dzjm7gtcMuEE8mNlKE10zXvhB-PGD0DoRBZhfdFS79dXBqTX4odsrwoKqIdui3bRhb-R5jzu0uPlG26uBLIEI4sx9O3l2h2WQ90kmz_1mGo5ua_C8hCDRo0YbrZCwWKXsCdUXZ6beGZ_zF8hX0tF1fCpo8434ENB8HPIBrIk1Htw2yyv9FcGaZxkHyz0e4z3C0O0LDOKEDEkNwNhxbj_PyzMmcjiJhWwlqRuF5zRjvog6P8wYLp_VWvo-AtzgX9pM-FEff4MrAI-KZDCsIODRcg0ffZo4GM7dSx8DWUn2TVKRp_OATsaqmayVyvQIiKddl9wFbAJO1-jcvRgNYWKfzUQymlPh0AoSw_XxIvB6WWfEyOrdmoyt0H7mr5HelerePvZ7EdjvCsIuHL0ITDw85J_nZumli1ZBDRdoVRfb87Jy_jKlZsTfuKqj7vdEZjP70KXYkykF7dMfNHaxrA6ORHiSOt5cA5ULjOYxzPctVl_f6wps0HKNVduF7wpXYWS6UC82oW6iw7q5dMj-eI0XK73wApUIoQqjqCxRRjqPpZxgP67FGI3eWFSdcXbphs0v2c_yywJNbOrRGSrGtD5g72Z6J4-tw-BM0M1FNrnK1vE6VZ0aMKkcAMo-XGBYiYUjr6PZVMTQFjdpMKOuCX3EFF17fhz9Ga7HWd7_-tc___UPu73LMavl-4cZOd_hLrlBF7a51JUnG-Zs5SddNtgG9Jht-CVriQPnQ4JTZg9VdFdLquvYDDAihkBLYFMALjO6YhyUW5LbQSz1Y4no3LWKGV5LLxs4p0bCUsWFk0z1aght94WLziFZU06P-eEAGqI4LP-442Gn-0ibEh58gFFh5Z9vPgqMfiw7Cj442eAFBeUYvIaEv1NzmanyuUk2B1H6cwXRXTQ7FyhInDG-V_Z25O4gUxo3joZaJOo_e2PsghJj6ez0T3gyViDjUwB4ifGUX7ho0ecz8iYBI1xxmxP1kgsx1z1ZvjBtFlhByg0pCB24-rTrYBgyeuQga0Z7kd4VjNyA9434g8GwHE3_R-Z3acpNDv5UZnboNPrYkX584b5MVV1Jo9v_rnLbekqPcyv_ysYK1Ppku59LfqmBcowSX5RnqTf706QI7hbQtcxNwKZO5nuGSzjyPEBRtNmE9vkEOP-oiOh8zzVHoM1DnCnHj__oGCjzfCJbU9Z90h3nuFJYO9I4WKYIWbQPX3IM4_Mlqkev36PXUUFrdMooj4S2NcStrXQUk6Lxv2POxCOabJHFD-uMQcf7g5qF6BLs8BvVes7bWW5fTcBwO7K2ezt-AVKkwkURIGQbMb1nNb3isWzKVCmARuaMfQPY_EO1r-sHWDDYLL4bPa6YYjc7jLzm7OJzGd14LHQJiUB_d-Z3VfFWruMJ-ofKl7eTnFQlmPjX9vcqvMS283Y6VF0r2duj8pis_38Z__t_D2xybloLAAA=";
+const token = "H4sIAAAAAAAEACWWxQrtihWG3-VMU8iOJ4U7iO24e2Zxd0_pu3cfOl-w4OO3__wxk6efkvzPv_-oQAjRemGiWZ3cJfA1YXVSLwfdJDsh4c-tDxwtTyZPH-26MCoVbeXT5aRt4rVw0LFgbmGFnVWa4iIK4lSUnKq19whlcUsWt_WsaXxCsSW585f0SfyiGsWwH3ziK8tvXc7XFwqFmZ-Pa80fQjnIN0g5m2ibgtYPoanw_Q3qB-YMuyRd_7TsL9EF96H2k09m7pQy2NbBIFnk1kJcmWhagtlT5z63w6oHfKWCO8EmISI07Hk45-LniLW1wK2AUYgzDUcWHUH5iI9Dboml4hXR48p43-qWxkUY7Xl_95VCQAShd2u-EUXljXfLBnlz3YMYYX_g9-VB1s4bbjF4FRU501W4vAlNlDvWFzBYRPY647KC6erYJVCaQlLWO59kvuExnN5oVxscDewM8KMRvRJS8Qe9LdNC1MAjXdtieyNguqoPTx8pkopPJG3MghyiQAuFxNwze9G6KKiU9DKkReXrSZ3snsASE3BxdMJnoIRdB1hSQ_eQx8hQWEnyjWy5GbbRlwirhQzMuQfEz8fS5hsVclZByKTUiAleOLXySzVNgA7KU4gqssljsRIDFHlNVKuoSrFT3ohXpCtltc7DJcdZEPA0Qu2Js3Qg06xZMBUSpd2qx64YvsZw5QuW1OZIZhPPba1mDTgzIJ_Lrkyah3Iq8EJxl0aW252hNBKdoIgiGQJwpgN8PVh_9eq6WLEZZoucqrmuVQl8wyRVG96xs_WI0JEa-3FOg6hVLplTmaYcLaHUTGPim6TPSEacddIS7pfDndO0b24b1U5mtu087yA3o12wTAaqvqtGV2Be-QqS7UosvTOGuJtalfhJWrQLSwo6ZZlhm93ik3x0nvysp4KmAcpJavMkI8u3j_UtNMLGGQ3Xsso-wpyeT5bOkJ1KkOZyBBXiijqsYlozILhte2UpBD02JkZyKaDmhJC3g1PX5ZGLVMSNbYNJ5GS3fp45yfXlAunj_AQF7SFMhimd31PQMyvz0HCf_aa6wGO2-gVCTRN3GHfjuqv04woSVg8ATxCJgukFah-q9CijpT38wWLU2nJSturMylFgst6RgmjK4Nzg7v6B0_lqLVNGuOtTgoBghmz4_gZFL-PPDccGQQ0Me4-2f2RM1RJT5wXxh-PUm6R7jBSXBGZ0GV1_4UKBlA8iLNhr94hqlZQvwOiOj7PGLGCQlw3mqHNs8CaxVzd_JDnOzj6MS9QEGl6ytiIT71Uyd5uekGAf2k1zykONRNMdGa0m-S77TBBUFiQDfZ0g6r8u8vrxDINAIy_FLeJxvb5oHvc5r96GtAQKI6Lpe7WSOspEgSApcY-NzGgYFuH78kq5HjUig2mal7xPDgsLmeH5mbW4Dh_9DUJEM8VHqT5aFw0Bk5ZsDk--7uc5z0x0i3Dnk8nF3BWkzA4namYCC5Bs7LW0Te8bcHBz5sgtPTU3Eg9IsdFEI_MSWoCFfoQiHS4dswINi5pw4qRzC-zBvlo83OPq9cYd0-hcAIj0YXcxznm4P0dhbspUDwUFZheJmYymQdeQJhCcdBfQPciOv2tiCDQYGV4hM9cBHx_-pYKaW6o6MM2Gw8iRbasu4rTtNaHtETIgIpCbU7qyj_MY6VcDYUuPMcPVE_TKMk2uIY0IcjBIoDrU5waxT9XtaODFGRaWkoxHZQ0ZEsIw5pbpRGqPsRV3bhsnL1tEh7_FDhOO0DnMPFXUspfHICqTteUSg9z_tEWAtVMw6zCAywQDalr6X7JVRa2rR_x4qkNxgpT0HbjJviMJ-d-DcuA1s34qSspr6nf941qeK0Wnx-Ho77Nn6ydhSZLF-IJBVLHC4S0zq9uBN6Hs8FwV93q71GLGjCdGzOkCxrDFzpmOCCmEl0Zqx2hT6p76gQJTQJJX0PBFERuyRYxG1cADvOn93HFxlCupAL0axOdcC2QR0-KJI2I9-Zkn7Zes-MLd4R1hVh68Q7aSx32VgI4RBUET9J1NCQlYG-D2JFZ1aCvmnF8W7enfutt2i5b3--TM-LYSSnK-YBLo2jrosO-Hs7K1kA8l79VcX0OTfv8HJQVyVYJxZx2f2-1ENyMBF26ks7kjLy_FBoVTb_vE4_jp-je4jpcrcBlmKqVCA9ujquMShEzndYq6wgJXxvwgI9Qbb0HiERUHCvFgrwD0Xu6zoWQOjg7TKrBjnOi3ua6TS1OJSUjKIs33gBEQ_ck1_POvP-z6zPukFM9vjsReHTykSseUYzrKwbhZj87J0voRtrHupTMziRAIycIKuGicUr581jh5p-O785nCfOigmzDjsA-f13XhYzCVlDV3EsLkkOWZKvyC1Na7nq6dv4ImnR5p7qCds-Cpm7GFSVwszHrR07UQ1jUHPgTir2bS0ddBxWxTXGcCyYajXGamBsnmSzVbm5MHi6nh6-QSoEiMgBX61b7-CO-uTFhhVI6DOmJFeRNnSm-r851ItlBlbGzHaguk6s5Lz-PewZoOvLKJJ95rI3AJcc_Oaxk1fiFUZSI5G5gAla5MjafBqKt-7rBTq1uL0ddTkZKo7JRHW9DGUWbR0hQmdsY-0sZXxt3u1T___MX8zL_ulPwfZUU5eVwUvwmAaAhw3wztS_P_r5ymGpP9WIvfmdgtkiI8W1X8nNHcxTdAVNGPahxrxkN4JR_hiqlG5e9gtJ0cpxCnLBKYgF8kSLAC816rn3Tc_-VzJAEOgu1m4y3vJf_y4qPgW_GIRjxyEIhU-jeani3oB_uXlEaqRBa2zP7Mqg8xFux1RGnr1gMdN4bsNkR69ZUOYBMksxiSRaSm5OcH84erJqbN_oE7EblaCgsx3GFWL2yodeBnBBKeZ4giJ_od8HSSVcdu0ryGbTg8cLeR5YzNH6lDZ4Q-BNzvvbv9-Brx5S_cg_O_Syxgfn0VV15QMASVnO9Ji1Iwg8v8ytfbI_eYCBHk9XNBNduJG5BkOg6Xbg-4_-3m6U5emgqvH-b__g-s7KZMggsAAA==";
 const embedUrl = "https://app.powerbi.com/reportEmbed?reportId=bac25fa7-d58d-40b6-8b01-606d165c3b43&groupId=be8908da-da25-452e-b220-163f52476cdd";
 
 const reportId = "bac25fa7-d58d-40b6-8b01-606d165c3b43";
@@ -18,11 +22,24 @@ const reportId = "bac25fa7-d58d-40b6-8b01-606d165c3b43";
 export interface AppProps {
 }
 
+const columns = [
+    ['My Numbers', 30, 200, 100, 400, 150, 250],
+    ['Your Numbers', 50, 20, 10, 40, 15, 25]
+  ];
+
+  
 export default class App extends React.Component<AppProps, any> {
     constructor(props) {
         super(props);
         this.state = {
+            chartType: 'line'
         };
+    }
+    public _setBarChart() {
+        this.setState({ chartType: 'bar' });
+      }
+    public _setLineChart() {
+        this.setState({ chartType: 'line' });
     }
 
     render() {
@@ -269,6 +286,25 @@ export default class App extends React.Component<AppProps, any> {
                                 config={oneVisualConfig8}
                                 newSettings={newSettings}
                             />
+                        </div>
+                        </Draggable>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="graph resizable" draggable={true}>
+                       <LineGraph1/>
+                    </div>
+                    <div className="graph resizable" draggable={true}>
+                    <Chart 
+                        columns={columns}
+                        chartType={this.state.chartType} />     
+                        <button onClick={this._setBarChart.bind(this)}>bar</button> 
+                        <button onClick={this._setLineChart.bind(this)}>Line</button>
+                    </div>
+                    <div className="graph-container">
+                        <Draggable>
+                        <div className="graph resizable">
+                          
                         </div>
                         </Draggable>
                     </div>
