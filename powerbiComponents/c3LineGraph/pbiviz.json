@@ -1,8 +1,8 @@
 {
   "visual": {
-    "name": "lineChart",
-    "displayName": "lineChart",
-    "guid": "lineChartD8D36C52C63244DB8E362E67C00C0FDF",
+    "name": "c3LineGraph",
+    "displayName": "c3LineGraph",
+    "guid": "c3LineGraphC41B616C8F424F68B56F43CCB4491FE4",
     "visualClassName": "Visual",
     "version": "1.0.0",
     "description": "",
@@ -19,7 +19,7 @@
   },
   "externalJS": [
     "node_modules/powerbi-visuals-utils-dataviewutils/lib/index.js",
-    "node_modules/d3/build/d3.min.js",
+    "node_modules/d3/index.js",
     "node_modules/c3/c3.min.js",
     "src/c3Adapter.js"
   ],

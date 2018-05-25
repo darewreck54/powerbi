@@ -1,0 +1,136 @@
+{
+    "dataRoles": [
+        {
+            "displayName": "Category Data",
+            "name": "category",
+            "kind": "Grouping"
+        },
+        {
+            "displayName": "Measure Data",
+            "name": "measure",
+            "kind": "Measure"
+        },
+        {
+            "displayName": "Measure Data2",
+            "name": "measure2",
+            "kind": "Measure"
+        },
+        {
+            "displayName": "Default Value",
+            "name": "defaultValue",
+            "kind": "Measure"
+        }
+    ],
+    "objects": {
+        "defaultValue" : {
+            "displayName": "DefaultValue",
+            "properties": {
+                "defaultValue": {
+                    "displayName": "Default Value"
+                }
+            }
+        },
+        "general": {
+            "displayName": "General",
+            "displayNameKey": "formattingGeneral",
+            "properties": {
+                "selection": {
+                    "displayName": "Selection",
+                    "type": {
+                        "text": true
+                    }
+                },
+                "filter": {
+                    "type": {
+                        "filter": true
+                    }
+                },      
+                "selfFilter": {
+                    "type": {
+                        "filter": {
+                            "selfFilter": true
+                        }
+                    }
+                },
+                "rangeSelectionStart": {
+                    "type": {
+                        "text": true
+                    }
+                },
+                "rangeSelectionEnd": {
+                    "type": {
+                        "text": true
+                    }
+                }                                     
+            }
+        },    
+        "dataPoint": {
+            "displayName": "Data colors",
+            "properties": {
+                "defaultColor": {
+                    "displayName": "Default color",
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "showAllDataPoints": {
+                    "displayName": "Show all",
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "fill": {
+                    "displayName": "Fill",
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "fillRule": {
+                    "displayName": "Color saturation",
+                    "type": {
+                        "fill": {}
+                    }
+                },
+                 "fontSize": {
+                    "displayName": "Text Size",
+                    "type": {
+                        "formatting": {
+                            "fontSize": true
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "dataViewMappings": [
+        {
+            "categorical": {
+                "categories": {
+                    "for": {
+                        "in": "category"
+                    },
+                    "dataReductionAlgorithm": {
+                        "top": {}
+                    }
+                },
+                "values": {
+                    "select": [
+                        {
+                            "bind": {
+                                "to": "measure"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
