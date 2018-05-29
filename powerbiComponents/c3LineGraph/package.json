@@ -1,7 +1,11 @@
 {
   "name": "visual",
   "dependencies": {
+    "@types/moment": "^2.13.0",
+    "@types/moment-timezone": "^0.5.5",
     "c3": "^0.6.1",
+    "moment": "^2.22.1",
+    "moment-timezone": "^0.5.17",
     "powerbi-visuals-utils-dataviewutils": "1.2.0"
   }
 }

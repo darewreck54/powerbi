@@ -43,14 +43,81 @@ module powerbi.extensibility.visual {
                 this.textNode = document.createTextNode(this.updateCount.toString());
                 new_em.appendChild(this.textNode);
                 new_p.appendChild(new_em);
-                this.target.appendChild(new_p);
+
+                const new_c: HTMLElement = document.createElement("div");
+                new_c.className = "chart";
+                new_c.id = "chart";
+
+        
+
+               // this.target.appendChild(new_p);
+                this.target.appendChild(new_c); 
             }
         }
 
 
         public update(options: VisualUpdateOptions) {
+            console.log("update called");
+            debugger;
+            let viewModel = this.visualTransform(options, null);
+
+            let xAxisData = [];
+            xAxisData.push("x");
+            
+            let dataSet1 = [];
+            let dataSet2 = [];
+            
+           // dataSet1.push("Gross Margin 1");
+            //dataSet2.push("Gross Margin 2");
+
+            dataSet1.push("Impression Counts");
+            viewModel.dataPoints.forEach( (data) => {
+                xAxisData.push(data.category);
+                dataSet1.push(data.value);
+            });
+
+            //console.log("xAxis:" + JSON.stringify(xAxisData));
+            //console.log("y:" + JSON.stringify(dataSet));
+            var chart = c3.generate({
+                bindto: "#chart",
+                data: {
+                    x: 'x',
+                    columns: [
+                        xAxisData,
+                        dataSet1
+                    ]
+                },
+                axis: {
+                    x: {
+                     // type: 'categorized',
+                     type : 'timeseries',
+                     tick: {
+                         format: (x) => {
+
+                            //var zone = moment.tz.zone('America/New_York');
+                            var test = new Date(x);
+                            return test.getDate();
+                          }
+                       //format: '%Y' // format string is also available for timeseries data
+                     }
+                    },
+                    y: {
+                        tick: {
+                            format: (d) => {
+                                return "" + d/1000 + "K";
+                            }
+                        }
+                    }
+                  }
+            });
+
+
+            console.log("View Model:" + JSON.stringify(viewModel));
+            console.log(options.dataViews);
             this.settings = Visual.parseSettings(options && options.dataViews && options.dataViews[0]);
             console.log('Visual update', options);
+
+
             if (typeof this.textNode !== "undefined") { 
                 this.textNode.textContent = (this.updateCount++).toString();
             }
@@ -58,6 +125,44 @@ module powerbi.extensibility.visual {
 
         private static parseSettings(dataView: DataView): VisualSettings {
             return VisualSettings.parse(dataView) as VisualSettings;
+        }
+
+        private visualTransform(options: VisualUpdateOptions, host: IVisualHost): any {
+            let dataViews = options.dataViews;
+    
+            let viewModel = {
+                dataPoints: [],
+                dataMax: 0,
+            };
+    
+            if (!dataViews
+                || !dataViews[0]
+                || !dataViews[0].categorical
+                || !dataViews[0].categorical.categories
+                || !dataViews[0].categorical.categories[0].source
+                || !dataViews[0].categorical.values
+            ) {
+                return viewModel;
+            }
+    
+            let categorical = dataViews[0].categorical;
+            let category = categorical.categories[0];
+            let dataValue = categorical.values[0];
+    
+            let barChartDataPoints = [];
+            let objects = dataViews[0].metadata.objects;
+    
+            for (let i = 0, len = Math.max(category.values.length, dataValue.values.length); i < len; i++) {
+                barChartDataPoints.push({
+                    category: category.values[i] + '',
+                    value: dataValue.values[i]
+                });
+            }
+    
+            return {
+    
+                dataPoints: barChartDataPoints,
+            };
         }
 
         /** 
