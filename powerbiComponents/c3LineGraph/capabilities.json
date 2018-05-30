@@ -6,9 +6,19 @@
             "kind": "Grouping"
         },
         {
-            "displayName": "Measure Data",
+            "displayName": "Version Category",
+            "name": "versionCategory",
+            "kind": "Grouping"
+        },
+        {
+            "displayName": "Values For Data Point",
             "name": "measure",
-            "kind": "Measure"
+            "kind": "GroupingOrMeasure"
+        },
+        {
+            "displayName": "Version Table",
+            "name": "version",
+            "kind": "GroupingOrMeasure"
         }
     ],
     "objects": {
@@ -74,6 +84,27 @@
                         {
                             "bind": {
                                 "to": "measure"
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "categorical": {
+                "categories": {
+                    "for": {
+                        "in": "versionCategory"
+                    },
+                    "dataReductionAlgorithm": {
+                        "top": {}
+                    }
+                },
+                "values": {
+                    "select": [
+                        {
+                            "bind": {
+                                "to": "version"
                             }
                         }
                     ]

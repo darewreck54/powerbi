@@ -49,7 +49,6 @@ module powerbi.extensibility.visual {
            
             this.visualHost = options.host;
           //  this.behavior = new SelectionBehavior(this.getCallbacks());
-            console.log()
             this.target = options.element;
             this.updateCount = 0;
 
@@ -81,6 +80,7 @@ module powerbi.extensibility.visual {
         }
 
         public update(options: VisualUpdateOptions) {
+            debugger;
             let dataViews = options.dataViews;
             console.log("update called:" + JSON.stringify(dataViews));
     
@@ -99,7 +99,7 @@ module powerbi.extensibility.visual {
             }
             console.log("update after called:" + JSON.stringify(dataView.categorical.categories[0].values));
     
-            const dropDownElement = this.target.getElementsByClassName("dropdown")[0];
+            const dropDownElement = this.target.getElementsByClassName("dropdown")[0] as HTMLSelectElement;
             console.log("num of value:" +         dataView.categorical.categories[0].values.length);
             dataView.categorical.categories[0].values.forEach( (value: string) => {
                 console.log("val:" + value);
@@ -131,6 +131,22 @@ module powerbi.extensibility.visual {
             }
                 */
             this.settings = Visual.parseSettings(options && options.dataViews && options.dataViews[0]);
+            dropDownElement.addEventListener('change', () => {
+                const index = dropDownElement.selectedIndex;
+                console.log("clicked:" + index  + " - " + dropDownElement[index].text);
+
+                debugger;
+                 let categories: DataViewCategoricalColumn = dataView.categorical.categories[0];
+        
+                let target: IFilterColumnTarget = {
+                    table: categories.source.queryName.substr(0, categories.source.queryName.indexOf('.')),
+                    column: categories.source.displayName
+                };
+
+                const filter = this.createVersionFilter(dropDownElement[index].text, target);
+                this.visualHost.applyJsonFilter(filter, "general", "filter", FilterAction.merge);
+            });
+
             console.log('Visual update', options);
             if (typeof this.textNode !== "undefined") {
                 this.textNode.textContent = (this.updateCount++).toString();
@@ -164,6 +180,21 @@ module powerbi.extensibility.visual {
             return VisualSettings.enumerateObjectInstances(this.settings || VisualSettings.getDefault(), options);
         }
 
+        private createVersionFilter(selectedVersion: string, target: IFilterColumnTarget ): IBasicFilter {
+            const basicFilter: IBasicFilter = {
+                $schema: null,
+                filterType: 1,
+                target: {
+                    table: target.table,
+                    column: target.column
+                },
+                operator: "In",
+                values: [
+                    selectedVersion
+                ]
+            };
+            return basicFilter;
+        }
            /**
          *  Callbacks consumed by the SelectionBehavior class
          *

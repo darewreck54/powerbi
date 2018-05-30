@@ -10,3 +10,7 @@ powerbiComponents/demo/.tmp/
 powerbiComponents/demo/node_modules/
 powerbiComponents/filterDemo/.tmp/
 powerbiComponents/test/node_modules/
+powerbiComponents/testK/.api/
+powerbiComponents/testK/.tmp/
+powerbiComponents/testK/node_modules/
+react-webpack-typescript-starter/npm-debug.log.967283482

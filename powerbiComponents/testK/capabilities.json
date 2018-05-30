@@ -7,59 +7,6 @@
         }
     ],
     "objects": {
-        "defaultValue" : {
-            "displayName": "DefaultValue",
-            "properties": {
-                "defaultValue": {
-                    "displayName": "Default Value"
-                },
-                "selection": {
-                    "displayName": "Selection" ,
-                    "type": {
-                        "text": true
-                    }
-                },
-                "filter": {
-                    "type": {
-                        "filter": true
-                    }
-                }
-            }
-        },
-        "general": {
-            "displayName": "General",
-            "displayNameKey": "formattingGeneral",
-            "properties": {
-                "selection": {
-                    "displayName": "Selection",
-                    "type": {
-                        "text": true
-                    }
-                },
-                "filter": {
-                    "type": {
-                        "filter": true
-                    }
-                },      
-                "selfFilter": {
-                    "type": {
-                        "filter": {
-                            "selfFilter": true
-                        }
-                    }
-                },
-                "rangeSelectionStart": {
-                    "type": {
-                        "text": true
-                    }
-                },
-                "rangeSelectionEnd": {
-                    "type": {
-                        "text": true
-                    }
-                }                                     
-            }
-        },    
         "dataPoint": {
             "displayName": "Data colors",
             "properties": {
@@ -71,6 +18,17 @@
                                 "color": true
                             }
                         }
+                    }
+                },
+                "selection": {
+                    "displayName": "Selection" ,
+                    "type": {
+                        "text": true
+                    }
+                },
+                "filter": {
+                    "type": {
+                        "filter": true
                     }
                 },
                 "showAllDataPoints": {
@@ -119,24 +77,6 @@
                 },
                 "values": {
                     "select": [
-                        {
-                            "bind": {
-                                "to": "measure"
-                            }
-                        }
-                    ]
-                }
-            }
-        },
-        {
-            "categorical": {
-                "categories": {
-                    "for": {
-                        "in": "category"
-                    }
-                },
-                "values": {
-                    "select": [ 
                         {
                             "bind": {
                                 "to": "category"

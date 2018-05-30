@@ -26,6 +26,7 @@
 
 module powerbi.extensibility.visual {
     "use strict";
+
     export class Visual implements IVisual {
         private target: HTMLElement;
         private updateCount: number;
@@ -47,18 +48,21 @@ module powerbi.extensibility.visual {
                 const new_c: HTMLElement = document.createElement("div");
                 new_c.className = "chart";
                 new_c.id = "chart";
-
         
+                const dropdown: HTMLElement = document.createElement("select");
+                dropdown.className = "dropdown";
+                this.target.appendChild(dropdown);
 
-               // this.target.appendChild(new_p);
-                this.target.appendChild(new_c); 
+                this.target.appendChild(new_p);
+               // this.target.appendChild(new_c);
             }
         }
 
-
         public update(options: VisualUpdateOptions) {
-            console.log("update called");
             debugger;
+            console.log("update called ");
+            debugger;
+            /*
             let viewModel = this.visualTransform(options, null);
 
             let xAxisData = [];
@@ -75,9 +79,25 @@ module powerbi.extensibility.visual {
                 xAxisData.push(data.category);
                 dataSet1.push(data.value);
             });
+            
+       
+         
+            const dropDownElement = this.target.getElementsByClassName("dropdown")[0];
+            dropDownElement.addEventListener('click', () => {
+                console.log("clicked");
+            });
 
+            viewModel.versions.forEach( (value: string) => {
+                console.log("val:" + value);
+               const option: HTMLElement = document.createElement("option");
+               option.setAttribute("value", value);
+               option.innerText = value;
+               dropDownElement.appendChild(option);
+            });
+               */
             //console.log("xAxis:" + JSON.stringify(xAxisData));
             //console.log("y:" + JSON.stringify(dataSet));
+            /*
             var chart = c3.generate({
                 bindto: "#chart",
                 data: {
@@ -111,7 +131,7 @@ module powerbi.extensibility.visual {
                   }
             });
 
-
+            
             console.log("View Model:" + JSON.stringify(viewModel));
             console.log(options.dataViews);
             this.settings = Visual.parseSettings(options && options.dataViews && options.dataViews[0]);
@@ -121,6 +141,7 @@ module powerbi.extensibility.visual {
             if (typeof this.textNode !== "undefined") { 
                 this.textNode.textContent = (this.updateCount++).toString();
             }
+                */
         }
 
         private static parseSettings(dataView: DataView): VisualSettings {
@@ -129,10 +150,13 @@ module powerbi.extensibility.visual {
 
         private visualTransform(options: VisualUpdateOptions, host: IVisualHost): any {
             let dataViews = options.dataViews;
+
+            console.log("dataView:" + dataViews);
     
             let viewModel = {
                 dataPoints: [],
                 dataMax: 0,
+                versions: []
             };
     
             if (!dataViews
@@ -141,6 +165,7 @@ module powerbi.extensibility.visual {
                 || !dataViews[0].categorical.categories
                 || !dataViews[0].categorical.categories[0].source
                 || !dataViews[0].categorical.values
+                || !dataViews[0].categorical.categories[1].source
             ) {
                 return viewModel;
             }
@@ -158,10 +183,14 @@ module powerbi.extensibility.visual {
                     value: dataValue.values[i]
                 });
             }
-    
+
+            debugger;
+            let versionCategory = categorical.categories[1];
+
+            const versionList = _.uniq(categorical.categories[1].values);
             return {
-    
                 dataPoints: barChartDataPoints,
+                versions: versionList
             };
         }
 
@@ -172,6 +201,23 @@ module powerbi.extensibility.visual {
          */
         public enumerateObjectInstances(options: EnumerateVisualObjectInstancesOptions): VisualObjectInstance[] | VisualObjectInstanceEnumerationObject {
             return VisualSettings.enumerateObjectInstances(this.settings || VisualSettings.getDefault(), options);
+        }
+
+
+        private createVersionFilter(selectedVersion: string): IBasicFilter {
+            const basicFilter: IBasicFilter = {
+                $schema: null,
+                filterType: FilterType.Basic,
+                target: {
+                    table: "Query1",
+                    column: "Version"
+                },
+                operator: "In",
+                values: [
+                    selectedVersion
+                ]
+            };
+            return basicFilter;
         }
     }
 }
